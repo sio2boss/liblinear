@@ -25,6 +25,15 @@ struct problem
 
 enum { L2R_LR, L2R_L2LOSS_SVC_DUAL, L2R_L2LOSS_SVC, L2R_L1LOSS_SVC_DUAL, MCSVM_CS, L1R_L2LOSS_SVC, L1R_LR, L2R_LR_DUAL, L2R_L2LOSS_SVR = 11, L2R_L2LOSS_SVR_DUAL, L2R_L1LOSS_SVR_DUAL }; /* solver_type */
 
+
+static const char *solver_type_table[]=
+{
+		"L2R_LR", "L2R_L2LOSS_SVC_DUAL", "L2R_L2LOSS_SVC", "L2R_L1LOSS_SVC_DUAL", "MCSVM_CS",
+		"L1R_L2LOSS_SVC", "L1R_LR", "L2R_LR_DUAL",
+		"", "", "",
+		"L2R_L2LOSS_SVR", "L2R_L2LOSS_SVR_DUAL", "L2R_L1LOSS_SVR_DUAL", NULL
+};
+
 struct parameter
 {
 	int solver_type;
@@ -56,9 +65,6 @@ void find_parameter_C(const struct problem *prob, const struct parameter *param,
 double predict_values(const struct model *model_, const struct feature_node *x, double* dec_values);
 double predict(const struct model *model_, const struct feature_node *x);
 double predict_probability(const struct model *model_, const struct feature_node *x, double* prob_estimates);
-
-int save_model(const char *model_file_name, const struct model *model_);
-struct model *load_model(const char *model_file_name);
 
 int get_nr_feature(const struct model *model_);
 int get_nr_class(const struct model *model_);

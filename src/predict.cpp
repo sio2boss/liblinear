@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "linear.h"
+#include "liblinear/linear.h"
+#include "liblinear/io.h"
 
 int print_null(const char *s,...) {return 0;}
 
