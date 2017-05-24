@@ -13,3 +13,6 @@ src/bindings/python/*.egg-info
 *.dylib
 *.so
 *.dll
+
+# liblinear output files
+*.model

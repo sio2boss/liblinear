@@ -8,6 +8,10 @@ from os import path
 import scipy
 from scipy import sparse
 
+if sys.version_info[0] < 3:
+	range = xrange
+	from itertools import izip as zip
+	
 __all__ = ['svm_read_problem', 'load_model', 'save_model', 'evaluations',
            'train', 'predict', 'liblinear', 'feature_node', 'gen_feature_nodearray', 'problem',
            'parameter', 'model', 'toPyModel', 'L2R_LR', 'L2R_L2LOSS_SVC_DUAL',
