@@ -1,3 +1,15 @@
-build
+# Intellij
 .idea
+
+# Build artifacts
+build
 cmake-build-debug
+
+# Python stuff
+src/bindings/python/*.egg-info
+*.pyc
+
+# Shared libraries
+*.dylib
+*.so
+*.dll
