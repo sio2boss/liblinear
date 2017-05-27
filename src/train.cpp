@@ -2,6 +2,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+#include <errno.h>
 
 #include "liblinear/linear.h"
 #include "liblinear/io.h"
@@ -52,6 +54,7 @@ void exit_with_help()
 	"-v n: n-fold cross validation mode\n"
 	"-C : find parameter C (only for -s 0 and 2)\n"
 	"-q : quiet mode (no outputs)\n"
+	"--version : print version and quit\n"
 	);
 	exit(1);
 }
@@ -184,6 +187,12 @@ void parse_command_line(int argc, char **argv, char *input_file_name, char *mode
 	flag_solver_specified = 0;
 	flag_find_C = 0;
 	bias = -1.0;
+
+	if (strcmp(argv[1], "--version") == 0)
+	{
+		fprintf(stdout, "version: %s\n", liblinear_version);
+		exit(0);
+	}
 
 	// parse options
 	for(i=1;i<argc;i++)

@@ -44,9 +44,9 @@ Quick Start
 "Quick Start with Scipy" is in the next section.
 
 There are two levels of usage. The high-level one uses utility functions
-in liblinearutil.py and the usage is the same as the LIBLINEAR MATLAB interface.
+in liblinear.py and the usage is the same as the LIBLINEAR MATLAB interface.
 
->>> from liblinearutil import *
+>>> from liblinear import *
 # Read data in LIBSVM format
 >>> y, x = svm_read_problem('../heart_scale')
 >>> m = train(y[:200], x[:200], '-c 4')
@@ -89,10 +89,10 @@ Make sure you have Scipy installed to proceed in this section.
 If numba (http://numba.pydata.org) is installed, some operations will be much faster.
 
 There are two levels of usage. The high-level one uses utility functions
-in liblinearutil.py and the usage is the same as the LIBLINEAR MATLAB interface.
+in liblinear.py and the usage is the same as the LIBLINEAR MATLAB interface.
 
 >>> import scipy
->>> from liblinearutil import *
+>>> from liblinear import *
 # Read data in LIBSVM format
 >>> y, x = svm_read_problem('../heart_scale', return_scipy = True) # y: ndarray, x: csr_matrix
 >>> m = train(y[:200], x[:200, :], '-c 4')
@@ -132,7 +132,7 @@ carefully.
 Design Description
 ==================
 
-There are two files liblinear.py and liblinearutil.py, which respectively correspond to
+There are two files liblinear.py and liblinear.py, which respectively correspond to
 low-level and high-level use of the interface.
 
 In liblinear.py, we adopt the Python built-in library "ctypes," so that
@@ -140,7 +140,7 @@ Python can directly access C structures and interface functions defined
 in linear.h.
 
 While advanced users can use structures/functions in liblinear.py, to
-avoid handling ctypes structures, in liblinearutil.py we provide some easy-to-use
+avoid handling ctypes structures, in liblinear.py we provide some easy-to-use
 functions. The usage is similar to LIBLINEAR MATLAB interface.
 
 Data Structures
@@ -237,7 +237,7 @@ LIBLINEAR shared library:
     Note that the returned structure of interface functions
     liblinear.train and liblinear.load_model is a ctypes pointer of
     model, which is different from the model object returned
-    by train and load_model in liblinearutil.py. We provide a
+    by train and load_model in liblinear.py. We provide a
     function toPyModel for the conversion:
 
     >>> model_ptr = liblinear.train(prob, param)
@@ -289,7 +289,7 @@ Utility Functions
 
 To use utility functions, type
 
-    >>> from liblinearutil import *
+    >>> from liblinear import *
 
 The above command loads
     train()            : train a linear model

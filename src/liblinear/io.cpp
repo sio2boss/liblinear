@@ -11,6 +11,10 @@
 
 #define Malloc(type,n) (type *)malloc((n)*sizeof(type))
 
+
+static char *line = NULL;
+static int max_line_len;
+
 int save_model(const char *model_file_name, const struct model *model_)
 {
 	int i;
@@ -200,7 +204,7 @@ struct model *load_model(const char *model_file_name)
 	return model_;
 }
 
-char* readline(FILE *input, int& max_line_len, char* line)
+static char* readline(FILE *input)
 {
     int len;
 
@@ -246,9 +250,8 @@ struct problem *read_problem(const char *filename, double bias)
 
     prob.l = 0;
     elements = 0;
-    int max_line_len = 1024;
-    char *line = Malloc(char,max_line_len);
-    while(readline(fp, max_line_len, line)!=NULL)
+    line = Malloc(char,max_line_len);
+    while(readline(fp)!=NULL)
     {
         char *p = strtok(line," \t"); // label
 
@@ -276,7 +279,7 @@ struct problem *read_problem(const char *filename, double bias)
     for(i=0;i<prob.l;i++)
     {
         inst_max_index = 0; // strtol gives 0 if wrong format
-        readline(fp, max_line_len, line);
+        readline(fp);
         prob.x[i] = &x_space[j];
         label = strtok(line," \t\n");
         if(label == NULL) // empty line
@@ -331,7 +334,5 @@ struct problem *read_problem(const char *filename, double bias)
     }
 
     fclose(fp);
-    free(line);
-    free(x_space);
     return prob_;
 }

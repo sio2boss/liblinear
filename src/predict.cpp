@@ -180,6 +180,7 @@ void exit_with_help()
 	"options:\n"
 	"-b probability_estimates: whether to output probability estimates, 0 or 1 (default 0); currently for logistic regression only\n"
 	"-q : quiet mode (no outputs)\n"
+	"--version : print version and quit\n"
 	);
 	exit(1);
 }
@@ -203,6 +204,9 @@ int main(int argc, char **argv)
 				info = &print_null;
 				i--;
 				break;
+			case '-':
+				fprintf(stdout, "version: %s\n", liblinear_version);
+				exit(0);
 			default:
 				fprintf(stderr,"unknown option: -%c\n", argv[i-1][1]);
 				exit_with_help();
